@@ -29,6 +29,7 @@
   } @if(cartItems.length > 0){
   <div class="checkout">
     <h3>Checkout</h3>
+    <br />
     <p>Subtotal: {{ getSubtotal() | currency }}</p>
     <p>Discount: {{ getDiscount() | currency }}</p>
     <p>Total: {{ getTotal() | currency }}</p>
