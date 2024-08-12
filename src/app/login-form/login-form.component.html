@@ -1,0 +1,71 @@
+<h1 class="form-header">Login</h1>
+
+<form class="form" #loginForm="ngForm" (ngSubmit)="handleSubmitForm(loginForm)">
+  <!--** Email **-->
+  <div class="mb-6">
+    <label for="email-input" class="label">Email Address</label>
+    <input
+      type="email"
+      id="email-input"
+      class="input"
+      name="email"
+      [(ngModel)]="form.email"
+      required
+      minlength="3"
+      pattern="[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,4}$"
+      #email="ngModel"
+    />
+    @if (email.invalid && email.touched) {
+      <div id="email-input" class="mt-4 text-red-600">
+        @if (email.hasError("required")) {
+          <span>Required</span>
+        }
+        @if (email.hasError("minlength")) {
+          <span>Min length is 3</span>
+        }
+        @if (email.hasError("pattern")) {
+          <span>Please enter a valid email</span>
+        }
+      </div>
+    }
+  </div>
+
+  <!--** Password **-->
+
+  <div class="mb-6">
+    <label for="password-input" class="label">Password</label>
+    <input
+      type="password"
+      id="password-input"
+      class="input"
+      pattern='^(?=.*[A-Z])(?=.*[a-z])(?=.*\d)(?=.*[!@#$%^&*(),.?":{}|<>])[A-Za-z\d!@#$%^&*(),.?":{}|<>]{8,}$'
+      name="password"
+      [(ngModel)]="form.password"
+      required
+      minlength="8"
+      #password="ngModel"
+    />
+    @if (password.invalid && password.touched) {
+      <div id="password-input" class="mt-4 text-red-600">
+        @if (password.hasError("required")) {
+          <p>Required</p>
+        }
+        @if (password.hasError("minlength")) {
+          <p>Min length is 3</p>
+        }
+        @if (password.hasError("pattern")) {
+          <p class="text-sm">
+            A valid password must be 8 characters and has at least one uppercase
+            letter, one lowercase letter, 1 digit, and one special character.
+          </p>
+        }
+      </div>
+    }
+  </div>
+
+  <!--** Submit Button **-->
+
+  <div class="flex justify-end">
+    <button type="submit" class="btn-submit">Login</button>
+  </div>
+</form>

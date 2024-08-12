@@ -1,0 +1,142 @@
+<div class="product-details-container">
+  <!-- Left Section: Product Images -->
+  <div class="product-images-section">
+    <div class="main-image-container">
+      <img
+        [src]="selectedImage || product.images[0]"
+        alt="{{ product.title }}"
+        class="main-image"
+      />
+    </div>
+    <div class="thumbnail-container">
+      @for( img of product.images ; track product.id){
+      <img
+        [src]="img"
+        alt="{{ product.title }}"
+        class="thumbnail"
+        [class.selected]="img === selectedImage"
+        (click)="selectImage(img)"
+      />
+      }
+    </div>
+    <hr />
+    <!-- Additional Info -->
+    <div class="additional-info">
+      <h3>Additional Information</h3>
+      <ul>
+        <li><strong>Brand:</strong> {{ product.brand }}</li>
+        <li><strong>Category:</strong> {{ product.category }}</li>
+        <li><strong>Weight:</strong> {{ product.weight }} lbs</li>
+        <li>
+          <strong>Dimensions:</strong> {{ product.dimensions.width }} ⨯
+          {{ product.dimensions.height }} ⨯ {{ product.dimensions.depth }} cm
+        </li>
+        <li><strong>Return Policy:</strong> {{ product.returnPolicy }}</li>
+      </ul>
+    </div>
+  </div>
+
+  <!-- Right Section: Product Information -->
+  <div class="product-info-section">
+    <h1>{{ product.title }}</h1>
+    <p class="description">{{ product.description }}</p>
+
+    <!-- Star Rating and Reviews -->
+    <div class="rating">
+      <app-star-rating [rating]="product.rating"></app-star-rating>
+      <span class="review-count"
+        >({{ product.reviews.length || 0 }} Reviews)</span
+      >
+    </div>
+    <hr />
+    <!-- Pricing Information -->
+    <p class="price">
+      <span class="discounted-price">
+        ${{
+          getWholePart(
+            product.price | priceAfterDis : product.discountPercentage
+          )
+        }}
+        <sup>{{
+          getCentsPart(
+            product.price | priceAfterDis : product.discountPercentage
+          )
+        }}</sup>
+        or ${{
+          (product.price | priceAfterDis : product.discountPercentage) / 6
+            | number : "1.2-2"
+        }}/Month
+      </span>
+    </p>
+    <p class="special-financing">
+      Suggested payments with 6 months special financing
+    </p>
+    <hr />
+    <!-- Availability and Stock Info -->
+    <div class="availability">
+      @if(product.stock>0){
+      <ng-container>
+        <span class="badge bg-success">In stock</span>
+      </ng-container>
+      }@else if(product.stock === 0){
+      <ng-container>
+        <span class="badge bg-danger">Out Of Stock</span>
+      </ng-container>
+      }
+      <br />
+      <div class="product-meta">
+        <span class="category" [attr.data-tooltip]="product.category"
+          >Category</span
+        >
+        <span class="brand" [attr.data-tooltip]="product.brand">Brand</span>
+      </div>
+    </div>
+    <hr />
+    <!-- Action Buttons -->
+    <div class="actions">
+      <div class="quantity-and-stock">
+        <div class="quantity-selector">
+          <button (click)="decreaseQuantity()">-</button>
+          <input
+            type="text"
+            [(ngModel)]="quantity"
+            min="1"
+            max="{{ product.stock }}"
+          />
+          <button (click)="increaseQuantity()">+</button>
+        </div>
+        <div class="stock-info">
+          <span class="stock-count">Only {{ product.stock }} items left!</span>
+          <p>Don't miss it</p>
+        </div>
+      </div>
+      <div class="action-buttons">
+        <button class="btn btn-buy">Buy Now</button>
+        <button class="btn btn-add-to-cart" (click)="addToCart()">Add to Cart</button>
+
+      </div>
+    </div>
+    <hr />
+    <!-- Reviews Section: Positioned under the right section -->
+    <div class="reviews-section">
+      <h2>Customer Reviews</h2>
+      <div *ngIf="product.reviews.length > 0; else noReviews">
+        <div class="review" *ngFor="let review of product.reviews">
+          <div class="review-header">
+            <app-star-rating [rating]="review.rating"></app-star-rating>
+            <div class="review-meta">
+              <span class="reviewer-name">{{ review.reviewerName }}</span>
+              <span class="review-date">{{
+                review.date | date : "shortDate"
+              }}</span>
+            </div>
+          </div>
+          <p class="review-comment">{{ review.comment }}</p>
+        </div>
+      </div>
+      <ng-template #noReviews>
+        <p>No reviews yet.</p>
+      </ng-template>
+    </div>
+  </div>
+</div>

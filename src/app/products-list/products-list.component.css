@@ -1,0 +1,64 @@
+.hero-section {
+  width: 100%;
+  background-color: transparent; /* Fully transparent background */
+  height: 70vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  position: relative;
+  text-align: center;
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1); /* Gray effect like a box shadow */
+}
+
+.hero-content {
+  max-width: 800px;
+  z-index: 2;
+  animation: contentFloat 4s ease-in-out infinite alternate;
+}
+
+.hero-content h1 {
+  font-size: 4rem; /* Bigger text */
+  font-weight: bold; /* Bold text */
+  animation: fadeInDown 1s ease-out;
+  color: #333; /* Dark gray text color */
+}
+
+.hero-content p {
+  font-size: 2rem; /* Bigger text */
+  font-weight: bold; /* Bold text */
+  margin: 20px 0;
+  animation: fadeInUp 1.5s ease-out;
+  color: #666; /* Lighter gray text color */
+}
+
+/* Content Animations */
+@keyframes contentFloat {
+  0% {
+    transform: translateY(0);
+  }
+  100% {
+    transform: translateY(-10px);
+  }
+}
+
+@keyframes fadeInDown {
+  0% {
+    opacity: 0;
+    transform: translateY(-50px);
+  }
+  100% {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes fadeInUp {
+  0% {
+    opacity: 0;
+    transform: translateY(50px);
+  }
+  100% {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}

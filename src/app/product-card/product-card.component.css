@@ -1,0 +1,114 @@
+.card {
+  border: 1px solid #ddd;
+  border-radius: 8px;
+  background-color: #fff;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+  position: relative;
+  overflow: hidden; /* Ensure image and badge are clipped to card */
+}
+
+.card:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 6px 12px rgba(0, 0, 0, 0.15);
+}
+
+.card-img-container {
+  width: 100%;
+  height: 200px; /* Fixed height */
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  overflow: hidden; /* Ensures no overflow of the image */
+  transition: transform 0.3s ease; /* Added for image zoom effect */
+}
+
+.card-img-container:hover .fixed-size-img {
+  transform: scale(1.05); /* Slight zoom effect on image */
+}
+
+.fixed-size-img {
+  max-width: 100%;
+  max-height: 100%;
+  object-fit: contain; /* Ensures the full image is visible without cropping */
+  transition: transform 0.3s ease; /* Smooth image scaling */
+}
+
+.card-body {
+  flex-grow: 1;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  text-align: left; /* Align text to the left */
+}
+
+.card-title {
+  font-size: 1.1rem; /* Adjusted font size */
+  color: #000; /* Set title color to black */
+  transition: color 0.3s ease; /* Smooth color transition */
+  margin: 0; /* Remove margin */
+}
+
+.card:hover .card-title {
+  color: #0056b3; /* Darker color on hover */
+}
+
+.price-container {
+  display: flex;
+  justify-content: space-between;
+  align-items: baseline;
+  margin-top: 0.5rem; /* Space between title and price */
+}
+
+.price {
+  font-size: 1.2rem; /* Slightly larger for emphasis */
+  color: #28a745; /* Green color for price */
+  margin-left: auto; /* Align price to the right */
+  display: flex;
+  align-items: baseline; /* Aligns the dollar and cents correctly */
+  transition: color 0.3s ease; /* Smooth color transition */
+}
+
+.price sup {
+  font-size: 0.75rem; /* Smaller font size for cents */
+  vertical-align: super; /* Aligns the cents correctly above the baseline */
+  margin-left: 0.2rem; /* Space between dollars and cents */
+}
+
+.card:hover .price {
+  color: #218838; /* Darker green on hover */
+}
+
+.price-original {
+  margin-left: 0.5rem; /* Space between discounted price and original price */
+  text-decoration-line: line-through;
+  color: #6c757d; /* Muted color for original price */
+}
+
+.card-text {
+  font-size: 0.9rem; /* Smaller, muted text */
+  color: #6c757d; /* Muted color for description */
+}
+
+.btn-view,
+.btn-add-to-cart {
+  padding: 12px 25px;
+  border-radius: 50px;
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+.btn-view {
+  background-color: #4caf50;
+  color: white;
+  border: none;
+}
+
+.btn-add-to-cart {
+  background-color: transparent;
+  color: #4caf50;
+  border: 2px solid #4caf50;
+}
+.btn-view:hover,
+.btn-add-to-cart:hover {
+  transform: scale(1.05);
+  box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
+}

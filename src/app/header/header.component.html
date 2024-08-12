@@ -1,0 +1,34 @@
+<nav class="navbar navbar-expand-lg bg-body-tertiary">
+  <div class="container-fluid">
+    <a class="navbar-brand" routerLink="/">
+      <strong>Products</strong>
+    </a>
+    <div
+      class="collapse navbar-collapse justify-content-end"
+      id="navbarNavAltMarkup"
+    >
+      <div class="navbar-nav">
+        <a
+          class="nav-link"
+          routerLink="register-form"
+          routerLinkActive="active-link"
+          >Register</a
+        >
+        <a
+          class="nav-link"
+          routerLink="login-form"
+          routerLinkActive="active-link"
+          >Login</a
+        >
+        <div class="cart-icon-container">
+          <a class="nav-link" routerLink="cart" routerLinkActive="active-link">
+            <i class="fas fa-shopping-cart"></i>
+            @if(cartItemCount > 0){
+            <span class="cart-item-count">{{ cartItemCount }}</span>
+            }
+          </a>
+        </div>
+      </div>
+    </div>
+  </div>
+</nav>

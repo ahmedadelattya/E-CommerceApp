@@ -1,0 +1,42 @@
+<div class="cart-container" *ngIf="cartItems.length > 0">
+  <h2>Cart</h2>
+  @for(item of cartItems; track $index){
+  <div class="cart-item">
+    <img [src]="item.product.thumbnail" alt="{{ item.product.title }}" />
+    <div>
+      <h4>{{ item.product.title }}</h4>
+      <p>{{ item.product.price | currency }}</p>
+    </div>
+    <div class="quantity-control">
+      <button
+        (click)="onQuantityChange(item.product, item.quantity - 1)"
+        [disabled]="item.quantity <= 1"
+      >
+        -
+      </button>
+      <span>{{ item.quantity }}</span>
+      <button
+        (click)="onQuantityChange(item.product, item.quantity + 1)"
+        [disabled]="item.quantity >= item.product.stock"
+      >
+        +
+      </button>
+    </div>
+    <button (click)="onRemove(item.product)" class="delete-button">
+      <i class="fas fa-trash-alt"></i>
+    </button>
+  </div>
+  } @if(cartItems.length > 0){
+  <div class="checkout">
+    <h3>Checkout</h3>
+    <p>Subtotal: {{ getSubtotal() | currency }}</p>
+    <p>Discount: {{ getDiscount() | currency }}</p>
+    <p>Total: {{ getTotal() | currency }}</p>
+  </div>
+  }
+</div>
+@if(cartItems.length === 0){
+<div class="empty-cart">
+  <p>Your cart is empty.</p>
+</div>
+}
